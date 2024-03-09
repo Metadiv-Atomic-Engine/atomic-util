@@ -4,12 +4,17 @@ import (
 	"time"
 
 	"github.com/Metadiv-Atomic-Engine/atomic-util/static/handler"
+	"github.com/Metadiv-Atomic-Engine/atomic-util/static/model/entity"
 	"github.com/Metadiv-Atomic-Engine/atomic-util/static/module"
 	"github.com/Metadiv-Atomic-Engine/atomic/atomic"
 )
 
 func Install() {
 	atomic.Engine.InstallModule(module.Static)
+
+	atomic.NewDBMigration(
+		&entity.Static{},
+	)
 
 	/*
 		uploads
