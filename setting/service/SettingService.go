@@ -142,6 +142,7 @@ func (s *settingService) UpdateSettings(workspaceID uint, keys []string, keyValu
 }
 
 func (s *settingService) InitGlobalSettings() {
+	atomic.Engine.DB.AutoMigrate(entity.SystemSetting{})
 	keys := make([]string, 0)
 	for key := range module.RegisteredSettingMap {
 		keys = append(keys, key)
