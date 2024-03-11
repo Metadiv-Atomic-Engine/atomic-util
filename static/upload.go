@@ -29,7 +29,7 @@ func Upload(content []byte, filename string, workspaceID uint, public bool, pinn
 		return nil
 	}
 
-	static = repo.StaticRepo.Save(nil, static, workspaceID)
+	static = repo.StaticRepo.Save(atomic.Engine.DB, static, workspaceID)
 	if static == nil {
 		return nil
 	}
