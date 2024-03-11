@@ -25,6 +25,7 @@ func Upload(content []byte, filename string, workspaceID uint, public bool, pinn
 	}
 	static.InitUUID()
 
+	content = service.EncryptService.Encrypt(content)
 	if !service.ContentFileService.Save(static.UUID, content, workspaceID) {
 		return nil
 	}
