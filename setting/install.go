@@ -6,6 +6,7 @@ import (
 	"github.com/Metadiv-Atomic-Engine/atomic-util/setting/handler"
 	"github.com/Metadiv-Atomic-Engine/atomic-util/setting/model/entity"
 	"github.com/Metadiv-Atomic-Engine/atomic-util/setting/module"
+	"github.com/Metadiv-Atomic-Engine/atomic-util/setting/service"
 	"github.com/Metadiv-Atomic-Engine/atomic/atomic"
 )
 
@@ -78,4 +79,10 @@ func Install() {
 			Duration: time.Minute,
 		},
 	)
+
+	/*
+		We init the global settings here.
+		We init the global settings before the job execution from another module.
+	*/
+	service.SettingService.InitGlobalSettings()
 }

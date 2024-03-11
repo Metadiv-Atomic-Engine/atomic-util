@@ -140,3 +140,33 @@ func (s *settingService) UpdateSettings(workspaceID uint, keys []string, keyValu
 
 	return repo.SystemSettingRepo.SaveAll(atomic.Engine.DB, settings)
 }
+
+func (s *settingService) InitGlobalSettings() {
+	keys := make([]string, 0)
+	for key := range module.RegisteredSettingMap {
+		keys = append(keys, key)
+	}
+	sets := s.GetSettings(0, keys)
+
+	existingMap := make(map[string]bool)
+	for _, set := range sets {
+		existingMap[set.Key] = true
+	}
+
+	toCreate := make([]entity.SystemSetting, 0)
+	for key := range module.RegisteredSettingMap {
+		if _, ok := existingMap[key]; !ok {
+			toCreate = append(toCreate, entity.SystemSetting{
+				Key:         key,
+				Type:        module.RegisteredSettingMap[key].Type,
+				Value:       module.RegisteredSettingMap[key].Value,
+				WorkspaceID: 0,
+				Public:      module.RegisteredSettingMap[key].Public,
+			})
+		}
+	}
+
+	if len(toCreate) > 0 {
+		repo.SystemSettingRepo.SaveAll(atomic.Engine.DB, toCreate)
+	}
+}
