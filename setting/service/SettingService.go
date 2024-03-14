@@ -4,6 +4,7 @@ import (
 	"github.com/Metadiv-Atomic-Engine/atomic-util/setting/model/entity"
 	"github.com/Metadiv-Atomic-Engine/atomic-util/setting/module"
 	"github.com/Metadiv-Atomic-Engine/atomic-util/setting/repo"
+	"github.com/Metadiv-Atomic-Engine/atomic-util/static"
 	"github.com/Metadiv-Atomic-Engine/atomic/atomic"
 	"github.com/Metadiv-Atomic-Engine/sql"
 )
@@ -135,6 +136,9 @@ func (s *settingService) UpdateSettings(workspaceID uint, keys []string, keyValu
 	)
 
 	for i := range settings {
+		if settings[i].Type == "image" {
+			static.SmartPin(atomic.Engine.DB, settings[i].Value, keyValue[settings[i].Key], settings[i].WorkspaceID)
+		}
 		settings[i].Value = keyValue[settings[i].Key]
 	}
 
