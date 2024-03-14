@@ -6,4 +6,5 @@ const (
 	TYPE_FLOAT  = "float"
 	TYPE_BOOL   = "bool"
 	TYPE_IMAGE  = "image"
+	TYPE_COLOR  = "color"
 )
