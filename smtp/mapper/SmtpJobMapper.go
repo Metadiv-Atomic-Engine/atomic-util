@@ -48,6 +48,12 @@ func (m *smtpJobMapper) ToDTO(e *entity.SmtpJob) *dto.SmtpJob {
 	d.Locale = e.Locale
 	d.TryTimes = e.TryTimes
 	d.Status = e.Status
+	if e.Account != nil {
+		d.Account = SmtpAccountMapper.ToDTO(e.Account)
+	}
+	if e.Template != nil {
+		d.Template = SmtpTemplateMapper.ToDTO(e.Template)
+	}
 	return d
 }
 

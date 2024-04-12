@@ -4,6 +4,7 @@ import (
 	"github.com/Metadiv-Atomic-Engine/atomic-util/smtp/errs"
 	"github.com/Metadiv-Atomic-Engine/atomic-util/smtp/model/entity"
 	"github.com/Metadiv-Atomic-Engine/atomic-util/smtp/repo"
+	"github.com/Metadiv-Atomic-Engine/atomic-util/smtp/service"
 	"gorm.io/gorm"
 )
 
@@ -16,6 +17,7 @@ func SendEmail(
 	templateID uint,
 	value map[string]string,
 	locale string,
+	sendImmediately bool,
 	workspaceID ...uint,
 ) (errCode string) {
 	account := repo.SmtpAccountRepo.FindByID(tx, accountID, workspaceID...)
@@ -37,7 +39,9 @@ func SendEmail(
 	job.SetBcc(bcc)
 	job.Locale = locale
 	job.SetValue(value)
-
 	repo.SmtpJobRepo.Save(tx, job, workspaceID...)
+	if sendImmediately {
+		service.SmtpService.SendEmail(tx, job)
+	}
 	return ""
 }
