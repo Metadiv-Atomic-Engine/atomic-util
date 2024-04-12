@@ -49,4 +49,45 @@ func Install() {
 		nil,
 		nil,
 	)
+
+	/* smtp template */
+	atomic.NewGetApi(
+		"8Pa54U03B1LPpK8gKjCcu",
+		handler.API_SMTP_TEMPLATE_LIST,
+		"/smtp/template",
+		nil,
+		nil,
+	)
+
+	atomic.NewGetApi(
+		"h6oJhU9cgViiB4vZR0pBl",
+		handler.API_SMTP_TEMPLATE_GET,
+		"/smtp/template/:id",
+		nil,
+		nil,
+	)
+
+	atomic.NewPostApi(
+		"jSyrN4SX1IiKJokjzLQLi",
+		handler.API_SMTP_TEMPLATE_CREATE,
+		"/smtp/template",
+		nil,
+		nil,
+	)
+
+	atomic.NewPutApi(
+		"GppKnbMHN6xOWwROKGjmq",
+		handler.API_SMTP_TEMPLATE_UPDATE,
+		"/smtp/template/:id",
+		nil,
+		nil,
+	)
+
+	atomic.NewDeleteApi(
+		"TUV8CWMmu5fYBbwUMY7Hc",
+		handler.API_SMTP_TEMPLATE_DELETE,
+		"/smtp/template/:id",
+		nil,
+		nil,
+	)
 }
