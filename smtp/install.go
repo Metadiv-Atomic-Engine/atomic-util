@@ -90,4 +90,45 @@ func Install() {
 		nil,
 		nil,
 	)
+
+	/* smtp job */
+	atomic.NewGetApi(
+		"tUfD3bmE5CmX3dYr1RHt6",
+		handler.API_SMTP_JOB_LIST,
+		"/smtp/job",
+		nil,
+		nil,
+	)
+
+	atomic.NewGetApi(
+		"tIbLQDfmCNJgHCRIu8EU1",
+		handler.API_SMTP_JOB_GET,
+		"/smtp/job/:id",
+		nil,
+		nil,
+	)
+
+	atomic.NewPostApi(
+		"sjO5kwJ8kbOd89mNuXIwM",
+		handler.API_SMTP_JOB_CREATE,
+		"/smtp/job",
+		nil,
+		nil,
+	)
+
+	atomic.NewPutApi(
+		"T4uj67UX5j5JF1gRIARPM",
+		handler.API_SMTP_JOB_UPDATE,
+		"/smtp/job/:id",
+		nil,
+		nil,
+	)
+
+	atomic.NewDeleteApi(
+		"AvvtDRLDFm6htqP9JQ3ri",
+		handler.API_SMTP_JOB_DELETE,
+		"/smtp/job/:id",
+		nil,
+		nil,
+	)
 }

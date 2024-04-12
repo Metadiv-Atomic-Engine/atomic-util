@@ -3,9 +3,9 @@ package dto
 type SmtpJob struct {
 	ID uint `json:"id"`
 
-	To  string `json:"to"`
-	Cc  string `json:"cc"`
-	Bcc string `json:"bcc"`
+	To  []string `json:"to"`
+	Cc  []string `json:"cc"`
+	Bcc []string `json:"bcc"`
 
 	AccountId uint         `json:"account_id"`
 	Account   *SmtpAccount `json:"account"`
@@ -13,11 +13,11 @@ type SmtpJob struct {
 	TemplateId uint          `json:"template_id"`
 	Template   *SmtpTemplate `json:"template"`
 
-	Value  string `json:"value"`
-	Locale string `json:"locale"`
+	Value  map[string]string `json:"value"`
+	Locale string            `json:"locale"`
 
-	TryTimes int `json:"try_times"`
-	Status   int `json:"status"` // pending, retrying, success, failed
+	TryTimes int    `json:"try_times"`
+	Status   string `json:"status"` // pending, retrying, success, failed
 }
 
 func (j *SmtpJob) StatusPending() string {
