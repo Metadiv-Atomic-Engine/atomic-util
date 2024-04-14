@@ -29,6 +29,7 @@ var API_SMTP_ACCOUNT_UPDATE = atomic.NewApiHandler(
 	&atomic.TypescriptOpt{
 		Models:       []any{request.SmtpAccountUpdate{}, dto.SmtpAccount{}},
 		FunctionName: "updateSmtpAccount",
+		Paths:        []string{"id"},
 		Body:         "SmtpAccountUpdate",
 		Response:     "SmtpAccount",
 	},

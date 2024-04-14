@@ -26,6 +26,7 @@ var API_SMTP_TEMPLATE_UPDATE = atomic.NewApiHandler(
 	},
 	&atomic.TypescriptOpt{
 		Models:       []any{request.SmtpTemplateUpdate{}, dto.SmtpTemplate{}},
+		Paths:        []string{"id"},
 		FunctionName: "updateSmtpTemplate",
 		Body:         "SmtpTemplateUpdate",
 		Response:     "SmtpTemplate",
