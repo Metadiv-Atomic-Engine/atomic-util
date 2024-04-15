@@ -2,12 +2,19 @@ package smtp
 
 import (
 	"github.com/Metadiv-Atomic-Engine/atomic-util/smtp/handler"
+	"github.com/Metadiv-Atomic-Engine/atomic-util/smtp/model/entity"
 	"github.com/Metadiv-Atomic-Engine/atomic-util/smtp/module"
 	"github.com/Metadiv-Atomic-Engine/atomic/atomic"
 )
 
 func Install() {
 	atomic.Engine.InstallModule(module.Smtp)
+
+	atomic.NewDBMigration(
+		&entity.SmtpAccount{},
+		&entity.SmtpTemplate{},
+		&entity.SmtpJob{},
+	)
 
 	/* smtp account */
 	atomic.NewGetApi(
