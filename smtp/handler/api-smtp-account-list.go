@@ -15,8 +15,8 @@ var API_SMTP_ACCOUNT_LIST = atomic.NewApiHandler(
 	"SMTP account list",
 	func(ctx *atomic.Context[base.RequestListing]) {
 		accounts, page := repo.SmtpAccountRepo.FindAllComplex(ctx.DB, ctx.Request.BuildDecryptedSimilarClause(
-			"email",
 			"host",
+			"port",
 			"user",
 			"password",
 		), ctx.Page, ctx.Sort, "", ctx.WorkspaceID())
