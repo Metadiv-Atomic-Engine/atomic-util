@@ -6,6 +6,7 @@ import (
 	"github.com/Metadiv-Atomic-Engine/atomic-util/static/repo"
 	"github.com/Metadiv-Atomic-Engine/atomic/atomic"
 	"github.com/Metadiv-Atomic-Engine/atomic/base"
+	"github.com/Metadiv-Atomic-Engine/sql"
 )
 
 var API_STATIC_LIST = atomic.NewApiHandler(
@@ -13,10 +14,13 @@ var API_STATIC_LIST = atomic.NewApiHandler(
 	"UI7cPHeyg4tg2T3yf0WEP",
 	"List static",
 	func(ctx *atomic.Context[base.RequestListing]) {
-		statics, page := repo.StaticRepo.FindAllComplex(ctx.DB, ctx.Request.BuildSimilarClause(
-			"uuid",
-			"filename",
-			"file_type",
+		statics, page := repo.StaticRepo.FindAllComplex(ctx.DB, sql.And(
+			ctx.Request.BuildSimilarClause(
+				"uuid",
+				"filename",
+				"file_type",
+			),
+			sql.Eq("pinned", true),
 		), ctx.Page, ctx.Sort, "", ctx.WorkspaceID())
 		if statics == nil {
 			ctx.InternalServerErr()
