@@ -111,6 +111,13 @@ func Install() {
 		nil,
 		nil,
 	)
+	atomic.NewPostApi(
+		"9GMWhPPRXOptaFJudFThU",
+		handler.API_STATIC_PIN,
+		"/static/pin",
+		nil,
+		nil,
+	)
 
 	/*
 		Jobs
