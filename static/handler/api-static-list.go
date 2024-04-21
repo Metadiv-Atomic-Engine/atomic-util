@@ -17,9 +17,8 @@ var API_STATIC_LIST = atomic.NewApiHandler(
 	"List static",
 	func(ctx *atomic.Context[request.StaticList]) {
 		cls := make([]*sql.Clause, 0)
-		cls = append(cls, sql.Eq("pinned", true))
-		if ctx.Request.IncludeUnpinned {
-			cls = append(cls, sql.Eq("pinned", false))
+		if !ctx.Request.IncludeUnpinned {
+			cls = append(cls, sql.Eq("pinned", true))
 		}
 		cls = append(cls, ctx.Request.BuildSimilarClause(
 			"uuid",
