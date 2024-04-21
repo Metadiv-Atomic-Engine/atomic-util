@@ -38,7 +38,7 @@ var API_STATIC_LIST = atomic.NewApiHandler(
 	&atomic.TypescriptOpt{
 		Models:       []any{entity.Static{}},
 		FunctionName: "listStaticInfo",
-		Forms:        []string{"page", "size", "by", "asc", "keyword"},
+		Forms:        []string{"page", "size", "by", "asc", "keyword", "uuids"},
 		Response:     "Static[]",
 	},
 )
